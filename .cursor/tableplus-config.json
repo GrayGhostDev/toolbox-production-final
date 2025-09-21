@@ -1,0 +1,139 @@
+{
+  "connections": {
+    "local_development": {
+      "name": "Cursor Development (Local)",
+      "type": "PostgreSQL",
+      "host": "localhost",
+      "port": 5432,
+      "database": "cursor_development",
+      "user": "postgres",
+      "password": "encrypted",
+      "sslMode": "disable",
+      "color": "#00C853",
+      "notes": "Local Docker PostgreSQL for Cursor IDE development"
+    },
+    "local_development_ssh": {
+      "name": "Cursor Development (SSH Tunnel)",
+      "type": "PostgreSQL",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "database": "cursor_development",
+      "user": "postgres",
+      "password": "encrypted",
+      "ssh": {
+        "enabled": true,
+        "host": "localhost",
+        "port": 22,
+        "username": "grayghostdata",
+        "authType": "publickey",
+        "privateKey": "~/.ssh/id_rsa",
+        "fingerprint": "98:90:f6:7f:ca:4f:61:ca:17:73:b2:8f:9e:f3:a7:6f"
+      },
+      "sslMode": "disable",
+      "color": "#2196F3",
+      "notes": "SSH tunnel connection using RSA 2048 key"
+    },
+    "local_development_ed25519": {
+      "name": "Cursor Development (SSH Ed25519)",
+      "type": "PostgreSQL",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "database": "cursor_development",
+      "user": "postgres",
+      "password": "encrypted",
+      "ssh": {
+        "enabled": true,
+        "host": "localhost",
+        "port": 22,
+        "username": "grayghostdata",
+        "authType": "publickey",
+        "privateKey": "~/.ssh/id_ed25519",
+        "fingerprint": "d8:53:55:6e:b0:f6:3e:da:90:5e:ac:e5:c2:12:56:6a"
+      },
+      "sslMode": "disable",
+      "color": "#9C27B0",
+      "notes": "SSH tunnel using Ed25519 key (recommended)"
+    },
+    "gray_ghost_postgres": {
+      "name": "Gray Ghost PostgreSQL",
+      "type": "PostgreSQL",
+      "host": "localhost",
+      "port": 5433,
+      "database": "postgres",
+      "user": "postgres",
+      "password": "encrypted",
+      "sslMode": "disable",
+      "color": "#FF5722",
+      "notes": "Gray Ghost PostgreSQL container on port 5433"
+    },
+    "cursor_test": {
+      "name": "Cursor Test DB",
+      "type": "PostgreSQL",
+      "host": "localhost",
+      "port": 5432,
+      "database": "cursor_test",
+      "user": "postgres",
+      "password": "encrypted",
+      "sslMode": "disable",
+      "color": "#FFC107",
+      "notes": "Test environment database"
+    },
+    "cursor_production": {
+      "name": "Cursor Production DB",
+      "type": "PostgreSQL",
+      "host": "localhost",
+      "port": 5432,
+      "database": "cursor_production",
+      "user": "postgres",
+      "password": "encrypted",
+      "sslMode": "require",
+      "color": "#F44336",
+      "notes": "Production database - USE WITH CAUTION"
+    }
+  },
+  "ssh_configurations": {
+    "preferred": {
+      "method": "Ed25519",
+      "reason": "Better compatibility with OpenSSH 9.9, stronger security"
+    },
+    "available_keys": [
+      {
+        "type": "ED25519",
+        "path": "~/.ssh/id_ed25519",
+        "fingerprint_md5": "d8:53:55:6e:b0:f6:3e:da:90:5e:ac:e5:c2:12:56:6a",
+        "status": "recommended"
+      },
+      {
+        "type": "RSA-4096",
+        "path": "~/.ssh/id_rsa_4096",
+        "fingerprint_md5": "f5:fd:ad:7e:09:2b:c0:da:f7:88:51:89:c6:9a:42:ed",
+        "status": "available"
+      },
+      {
+        "type": "RSA-2048",
+        "path": "~/.ssh/id_rsa",
+        "fingerprint_md5": "98:90:f6:7f:ca:4f:61:ca:17:73:b2:8f:9e:f3:a7:6f",
+        "status": "available"
+      }
+    ]
+  },
+  "webssh_configuration": {
+    "host": "localhost",
+    "port": 22,
+    "username": "grayghostdata",
+    "authMethod": "publickey",
+    "preferredKey": "Ed25519",
+    "uncommonOptions": "PubkeyOrPassword",
+    "notes": [
+      "Username MUST be 'grayghostdata' not 'Ghost'",
+      "Ed25519 key recommended for OpenSSH 9.9 compatibility",
+      "If using RSA, ensure client supports rsa-sha2-256/512"
+    ]
+  },
+  "port_mappings": {
+    "5432": "claude-postgres (PostgreSQL 16)",
+    "5433": "gray_ghost_postgres (PostgreSQL 15)",
+    "3100": "Onboarding web app (remapped from 3000)",
+    "22": "SSH daemon"
+  }
+}

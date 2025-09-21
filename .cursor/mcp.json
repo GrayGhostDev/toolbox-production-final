@@ -1,0 +1,164 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem"
+      ],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/Users/grayghostdata,/tmp,/Volumes/G-DRIVE ArmorATD",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "git": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "."
+      ],
+      "env": {
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres"
+      ],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL:-postgresql://grayghostdata:postgres@localhost:5432/postgres}",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "stytch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-stytch"
+      ],
+      "env": {
+        "STYTCH_PROJECT_ID": "${STYTCH_PROJECT_ID}",
+        "STYTCH_SECRET": "${STYTCH_SECRET}",
+        "STYTCH_PUBLIC_TOKEN": "${STYTCH_PUBLIC_TOKEN}",
+        "STYTCH_ENV": "${STYTCH_ENV:-test}"
+      }
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "env": {
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "slack": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-slack"
+      ],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_WEBHOOK_URL": "${SLACK_WEBHOOK_URL}",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "docker": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-docker"
+      ],
+      "env": {
+        "DOCKER_HOST": "${DOCKER_HOST:-unix:///var/run/docker.sock}",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "kubernetes": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-kubernetes"
+      ],
+      "env": {
+        "KUBECONFIG": "${KUBECONFIG:-~/.kube/config}",
+        "USER_CONTEXT": "${STYTCH_USER_ID}"
+      }
+    },
+    "lf-starter_project": {
+      "command": "uvx",
+      "args": [
+        "mcp-proxy",
+        "http://localhost:7860/api/v1/mcp/project/32313c1f-e970-4fba-8f0b-bafc4408ae59/sse"
+      ]
+    },
+    "Stripe": {
+      "url": "https://mcp.stripe.com",
+      "headers": {}
+    }
+  },
+  "config": {
+    "autoStart": true,
+    "restartOnFailure": true,
+    "maxRestartAttempts": 3,
+    "healthCheckInterval": 60,
+    "requireAuthentication": true,
+    "enableLogging": true,
+    "logLevel": "info",
+    "timeout": 30000
+  },
+  "authentication": {
+    "provider": "stytch",
+    "required": true,
+    "sessionDuration": 28800,
+    "idleTimeout": 3600,
+    "mfaRequired": false
+  }
+}

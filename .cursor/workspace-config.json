@@ -1,0 +1,163 @@
+{
+  "workspace": {
+    "id": "workspace-prod-8a6f43b9-0c75-4ed6-b820-1a39ef377497",
+    "name": "Gray Ghost Data",
+    "slug": "gray-ghost-data",
+    "keyName": "cursor-config",
+    "keyId": "workspace-key-prod-a55a6ebd-8a20-4e13-8df2-d3342c74a6eb"
+  },
+  "project": {
+    "id": "project-test-cbf30b45-6865-48f7-a9a5-b1056296b3fa",
+    "domain": "https://aeolian-sponge-5813.customers.stytch.dev",
+    "environment": "test",
+    "name": "Cursor IDE Development"
+  },
+  "databases": {
+    "development": {
+      "name": "cursor_development",
+      "host": "localhost",
+      "port": 5432,
+      "user": "grayghostdata",
+      "ssl": false
+    },
+    "test": {
+      "name": "cursor_test",
+      "host": "localhost",
+      "port": 5432,
+      "user": "grayghostdata",
+      "ssl": false
+    },
+    "production": {
+      "name": "cursor_production",
+      "host": "localhost",
+      "port": 5432,
+      "user": "grayghostdata",
+      "ssl": true
+    },
+    "project": {
+      "name": "cursor_project",
+      "host": "localhost",
+      "port": 5432,
+      "user": "grayghostdata",
+      "ssl": false
+    }
+  },
+  "authentication": {
+    "provider": "stytch",
+    "methods": [
+      "magic_links",
+      "oauth",
+      "passkeys"
+    ],
+    "oauth_providers": [
+      "google",
+      "github",
+      "microsoft",
+      "gitlab"
+    ],
+    "mfa": {
+      "enabled": true,
+      "methods": ["totp", "sms"],
+      "enforcement": "optional"
+    },
+    "session": {
+      "duration": 28800,
+      "idleTimeout": 3600,
+      "autoRefresh": true
+    }
+  },
+  "integrations": {
+    "github": {
+      "enabled": true,
+      "org": "gray-ghost-data",
+      "sso": true,
+      "features": [
+        "pr_automation",
+        "issue_tracking",
+        "actions_integration",
+        "code_review",
+        "branch_protection"
+      ]
+    },
+    "slack": {
+      "enabled": true,
+      "appId": "A09GQ4M79LZ",
+      "appName": "Cursor-IDE-Config",
+      "teamId": "T090MJA31RV",
+      "socketMode": true,
+      "channels": {
+        "notifications": "#dev-notifications",
+        "builds": "#ci-cd",
+        "reviews": "#code-reviews",
+        "security": "#security-alerts"
+      }
+    }
+  },
+  "mcpServers": [
+    "filesystem",
+    "git",
+    "postgres",
+    "github",
+    "memory",
+    "sequential-thinking",
+    "stytch",
+    "slack",
+    "docker",
+    "kubernetes",
+    "puppeteer"
+  ],
+  "agents": {
+    "devAssistant": {
+      "enabled": true,
+      "model": "claude-3.5-sonnet",
+      "autoStart": true
+    },
+    "qualityBot": {
+      "enabled": true,
+      "model": "claude-3.5-sonnet",
+      "autoFix": true
+    },
+    "docBot": {
+      "enabled": true,
+      "model": "claude-3.5-sonnet",
+      "autoGenerate": true
+    },
+    "bugBot": {
+      "enabled": true,
+      "model": "claude-3-opus",
+      "autoReview": true
+    }
+  },
+  "automation": {
+    "onSave": true,
+    "preCommit": true,
+    "prePush": true,
+    "scheduled": {
+      "daily": ["09:00", "15:00", "17:00"],
+      "weekly": {
+        "monday": "09:00",
+        "friday": "16:00",
+        "sunday": "02:00"
+      }
+    }
+  },
+  "security": {
+    "scanning": true,
+    "secretRotation": true,
+    "auditLogging": true,
+    "compliance": ["SOC2", "GDPR", "HIPAA"],
+    "encryption": "AES-256"
+  },
+  "performance": {
+    "monitoring": true,
+    "caching": true,
+    "optimization": true,
+    "thresholds": {
+      "cpu": 75,
+      "memory": 80,
+      "disk": 90,
+      "responseTime": 2000,
+      "errorRate": 5
+    }
+  }
+}

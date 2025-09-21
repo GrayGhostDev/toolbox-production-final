@@ -1,0 +1,136 @@
+{
+  "editor.fontSize": 14,
+  "editor.fontFamily": "JetBrains Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "editor.autoIndent": "full",
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": true,
+  "editor.suggestSelection": "first",
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontFamily": "JetBrains Mono",
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "terminal.integrated.enableBell": true,
+
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.associations": {
+    "*.cursorrules": "toml",
+    "*.env*": "dotenv"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/dist": true,
+    "**/build": true
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.git": true,
+    "**/.next": true,
+    "**/coverage": true
+  },
+
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.postCommitCommand": "push",
+
+  "cursor.ai.model": "claude-3.5-sonnet",
+  "cursor.ai.temperature": 0.3,
+  "cursor.ai.maxTokens": 4096,
+  "cursor.ai.contextWindow": 8192,
+  "cursor.ai.autoSuggest": true,
+  "cursor.ai.enableMemory": true,
+  "cursor.ai.enableIndexing": true,
+
+  "cursor.authentication.provider": "stytch",
+  "cursor.authentication.required": true,
+  "cursor.authentication.sessionDuration": 28800,
+
+  "cursor.agents.autoStart": true,
+  "cursor.agents.concurrent": 3,
+  "cursor.agents.models": {
+    "dev_assistant": "claude-3.5-sonnet",
+    "quality_bot": "claude-3.5-sonnet",
+    "doc_bot": "claude-3.5-sonnet",
+    "bugbot": "claude-3-opus"
+  },
+
+  "cursor.mcp.autoStart": true,
+  "cursor.mcp.restartOnFailure": true,
+  "cursor.mcp.healthCheck": true,
+  "cursor.mcp.healthCheckInterval": 60,
+
+  "cursor.integrations.github.enabled": true,
+  "cursor.integrations.github.autoCreatePR": true,
+  "cursor.integrations.slack.enabled": true,
+  "cursor.integrations.postgresql.enabled": true,
+  "cursor.integrations.postgresql.autoConnect": true,
+
+  "cursor.automation.enabled": true,
+  "cursor.automation.onSave": [
+    "format",
+    "lint",
+    "checkTypes"
+  ],
+  "cursor.automation.preCommit": [
+    "lint",
+    "format",
+    "test",
+    "securityScan"
+  ],
+
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "prettier.enable": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.semi": false,
+
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "88"],
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "workbench.colorTheme": "Cursor Dark+",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": true,
+
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+
+  "telemetry.telemetryLevel": "error",
+  "security.workspace.trust.enabled": false,
+
+  "docker.showStartPage": false,
+  "docker.environment": {
+    "DOCKER_HOST": "unix:///var/run/docker.sock"
+  }
+}

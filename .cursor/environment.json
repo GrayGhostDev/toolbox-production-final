@@ -1,0 +1,164 @@
+{
+  "$schema": "https://cursor.dev/schema/environment.json",
+  "version": "1.0",
+
+  "telemetry": { "enabled": false },
+
+  "providers": {
+    "openai": {
+      "apiKey": "${env:OPENAI_API_KEY}",
+      "baseURL": "${env:OPENAI_BASE_URL|https://api.openai.com/v1}",
+      "organization": "${env:OPENAI_ORG|}",
+      "requestTimeoutMs": 60000,
+      "streaming": true
+    },
+    "anthropic": {
+      "apiKey": "${env:ANTHROPIC_API_KEY}",
+      "baseURL": "${env:ANTHROPIC_BASE_URL|https://api.anthropic.com}",
+      "requestTimeoutMs": 90000,
+      "streaming": true
+    }
+  },
+
+  "models": {
+    "aliases": {
+      "gpt-5": {
+        "provider": "openai",
+        "primary": "${env:CURSOR_DEFAULT_MODEL|gpt-4.1}",
+        "fallbacks": ["gpt-4o", "gpt-4o-mini"]
+      },
+      "claude-4.1-sonnet": {
+        "provider": "anthropic",
+        "primary": "${env:CURSOR_ANTHROPIC_MODEL|claude-3-7-sonnet-20250219}",
+        "fallbacks": ["claude-3-5-sonnet-20241022", "claude-3-5-sonnet-20240620"]
+      }
+    },
+    "default": "${env:CURSOR_DEFAULT_MODEL|gpt-5}"
+  },
+
+  "routing": {
+    "primaryProvider": "${env:CURSOR_PROVIDER_PRIMARY|openai}",
+    "fallbackOrder": ["openai", "anthropic"],
+    "stopOnExhaustion": true,
+    "rules": [
+      { "if": ["task:coding", "task:tool-use", "task:repo-ops", "task:code-review"], "use": "openai", "model": "${env:CURSOR_DEFAULT_MODEL|gpt-5}" },
+      { "if": ["task:analysis", "task:planning", "task:long-context", "task:knowledge-ops"], "use": "anthropic", "model": "${env:CURSOR_ANTHROPIC_MODEL|claude-4.1-sonnet}" }
+    ]
+  },
+
+  "agents": {
+    "enabled": true,
+    "categories": {
+      "codeIntelligence": { "enabled": true },
+      "codeReview": { "enabled": true },
+      "repoOps": { "enabled": true },
+      "knowledgeOps": { "enabled": true },
+      "communications": { "enabled": true }
+    },
+    "background": {
+      "cpuMaxPercent": 25,
+      "memoryMaxBytes": 2147483648,
+      "throttleStrategy": "token-bucket",
+      "hotReload": true
+    }
+  },
+
+  "privacy": {
+    "mode": "strict",
+    "respectGitIgnore": true,
+    "excludeGlobs": [
+      "**/.env",
+      "**/.env.*",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/venv/**",
+      "**/.venv/**",
+      "**/target/**",
+      "**/build/**",
+      "**/dist/**",
+      "**/*.pem",
+      "**/*.key",
+      "**/*secret*",
+      "**/*credential*",
+      "**/secrets/**",
+      "**/.aws/**",
+      "**/.terraform/**"
+    ],
+    "redact": {
+      "enable": true,
+      "patterns": [
+        { "name": "AWS Access Key", "regex": "AKIA[0-9A-Z]{16}" },
+        { "name": "Generic Bearer", "regex": "Bearer\s+[A-Za-z0-9-_\.=]+" },
+        { "name": "Password Assign", "regex": "(?i)password\s*=\s*['\"][^'\"]+['\"]" }
+      ]
+    }
+  },
+
+  "rateLimit": {
+    "maxRequestsPerHour": 100,
+    "scope": "user",
+    "burst": 10
+  },
+
+  "cache": {
+    "strategy": "lru",
+    "size": 1000,
+    "persistToDisk": true,
+    "invalidateOn": ["system-update", "config-change"]
+  },
+
+  "retries": {
+    "strategy": "exponential-backoff",
+    "initialDelayMs": 500,
+    "maxDelayMs": 10000,
+    "multiplier": 2.0,
+    "jitter": 0.1,
+    "retryOn": [429, 500, 502, 503, 504]
+  },
+
+  "mcpServers": {
+    "enabled": true,
+    "passThroughEnv": ["OPENAI_API_KEY", "ANTHROPIC_API_KEY"]
+  },
+
+  "errorHandling": {
+    "onProviderError": "failover",
+    "failoverOrder": ["openai", "anthropic"],
+    "stopOnExhaustion": true
+  },
+
+  "budget": {
+    "plan": "${env:CURSOR_SUBSCRIPTION_PLAN|pro}",
+    "monthlyUsdLimit": "${env:CURSOR_MONTHLY_BUDGET_USD|100}",
+    "thresholds": [
+      { "percent": 0.75, "action": "warn" },
+      { "percent": 0.90, "action": "throttle" },
+      { "percent": 1.00, "action": "disable" }
+    ],
+    "usageTracking": "local",
+    "resetDayOfMonth": "${env:CURSOR_BUDGET_RESET_DAY|1}"
+  },
+
+  "logging": {
+    "level": "${env:CURSOR_LOG_LEVEL|warn}",
+    "telemetry": { "enabled": false }
+  },
+
+  "uiPerformance": {
+    "terminalRenderBudgetMs": 16,
+    "inputLatencyMs": 20,
+    "rollingBufferLines": 10000
+  },
+
+  "shell": {
+    "posixCompatible": true,
+    "inheritEnv": true,
+    "forwardSignals": true
+  },
+
+  "misc": {
+    "diskIO": { "batchWrites": true },
+    "network": { "exponentialBackoff": true }
+  }
+}
+

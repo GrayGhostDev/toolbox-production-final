@@ -1,0 +1,405 @@
+# TOOLBOX-PRODUCTION-FINAL PROJECT RULES
+# Cursor IDE Development Automation System v2025.2
+# Project-specific configuration with Stytch authentication
+
+# =============================================================================
+# PROJECT METADATA
+# =============================================================================
+[project]
+name = "Toolbox-Production-Final"
+version = "1.0.0"
+description = "Production-ready toolbox application with enterprise features"
+author = "Gray Ghost Data"
+created = "2025-01-21"
+environment = "production"
+
+# =============================================================================
+# PROJECT INITIALIZATION WITH AUTHENTICATION
+# =============================================================================
+
+[project.auto_init]
+enabled = true
+on_project_open = true
+actions = [
+  "detect_framework",
+  "load_environment",
+  "initialize_stytch",
+  "authenticate_developer",
+  "start_background_agents",
+  "index_codebase",
+  "check_dependencies",
+  "load_mcp_servers",
+  "connect_database",
+  "verify_integrations"
+]
+
+# Framework detection and setup
+[project.frameworks]
+auto_detect = true
+primary = "react"
+supported = ["react", "next", "typescript", "node", "express"]
+ui_library = "tailwindcss"
+state_management = "zustand"
+testing = ["jest", "playwright", "cypress"]
+
+# =============================================================================
+# STYTCH AUTHENTICATION INTEGRATION
+# =============================================================================
+
+[authentication.stytch]
+enabled = true
+auto_start = true
+project_id = "${STYTCH_PROJECT_ID}"
+secret = "${STYTCH_SECRET}"
+public_token = "${STYTCH_PUBLIC_TOKEN}"
+environment = "${STYTCH_ENV:-production}"
+
+# Authentication methods
+[authentication.stytch.methods]
+magic_links = true
+oauth = ["google", "github", "microsoft", "gitlab"]
+sms_otp = true
+whatsapp_otp = true
+email_otp = true
+passkeys = true
+passwords = false
+totp = true
+crypto_wallets = false
+
+# Session management
+[authentication.stytch.sessions]
+duration_minutes = 480
+auto_refresh = true
+jwt_audience = ["toolbox-production", "cursor-ide"]
+cookie_domain = "${APP_DOMAIN:-localhost}"
+secure_cookies = true
+same_site = "strict"
+
+# MFA configuration
+[authentication.stytch.mfa]
+enabled = true
+enforcement = "required"
+allowed_methods = ["totp", "sms"]
+risk_based = true
+trust_device_days = 30
+
+# Organization settings
+[authentication.stytch.organization]
+enabled = true
+allow_discovery = true
+sso_enabled = true
+scim_enabled = true
+rbac_enabled = true
+max_members = 500
+
+# =============================================================================
+# TOOLBOX-SPECIFIC FEATURES
+# =============================================================================
+
+[toolbox]
+modules = [
+  "user_management",
+  "project_management",
+  "task_automation",
+  "reporting",
+  "analytics",
+  "integrations",
+  "api_gateway"
+]
+
+[toolbox.user_management]
+enabled = true
+features = ["profile", "settings", "teams", "permissions", "audit_log"]
+max_users = 10000
+role_based_access = true
+
+[toolbox.project_management]
+enabled = true
+features = ["boards", "tasks", "milestones", "gantt", "calendar"]
+max_projects = 1000
+collaboration = true
+
+[toolbox.automation]
+enabled = true
+workflows = ["ci_cd", "testing", "deployment", "monitoring", "alerts"]
+triggers = ["schedule", "webhook", "event", "manual"]
+max_concurrent = 10
+
+# =============================================================================
+# DATABASE CONFIGURATION
+# =============================================================================
+
+[database]
+primary = "postgresql"
+
+[database.postgresql]
+host = "${POSTGRES_HOST:-localhost}"
+port = "${POSTGRES_PORT:-5432}"
+name = "toolbox_production"
+user = "${POSTGRES_USER:-claude}"
+password = "${POSTGRES_PASSWORD}"
+ssl_mode = "require"
+pool_size = 20
+max_connections = 100
+
+[database.migrations]
+auto_run = true
+directory = "./migrations"
+track_history = true
+
+[database.backup]
+enabled = true
+schedule = "0 2 * * *"
+retention_days = 30
+s3_bucket = "${BACKUP_BUCKET}"
+
+# =============================================================================
+# BACKGROUND AGENTS WITH AUTH CONTEXT
+# =============================================================================
+
+[agents.dev_assistant]
+enabled = true
+model = "claude-3.5-sonnet"
+auto_start = true
+requires_auth = true
+user_context_aware = true
+capabilities = [
+  "code_analysis",
+  "optimization_suggestions",
+  "refactoring",
+  "dependency_management",
+  "security_scanning",
+  "performance_monitoring"
+]
+
+[agents.quality_bot]
+enabled = true
+model = "claude-3.5-sonnet"
+requires_auth = true
+enforce_rules = true
+auto_fix = true
+checks = [
+  "linting",
+  "formatting",
+  "type_checking",
+  "test_coverage",
+  "security_scan",
+  "auth_compliance",
+  "performance_check"
+]
+
+[agents.doc_bot]
+enabled = true
+model = "claude-3.5-sonnet"
+requires_auth = true
+auto_generate = true
+documentation_types = [
+  "inline_comments",
+  "function_docs",
+  "api_docs",
+  "readme_updates",
+  "auth_flow_docs",
+  "user_guides"
+]
+
+[agents.bugbot]
+enabled = true
+model = "claude-3-opus"
+requires_auth = true
+auto_review = true
+bug_categories = [
+  "null_checks",
+  "race_conditions",
+  "memory_leaks",
+  "security_vulnerabilities",
+  "performance_issues",
+  "auth_vulnerabilities",
+  "data_validation"
+]
+
+# =============================================================================
+# INTEGRATIONS
+# =============================================================================
+
+[integrations.github]
+enabled = true
+requires_auth = true
+token = "${GITHUB_TOKEN}"
+org = "gray-ghost-data"
+repo = "toolbox-production-final"
+features = [
+  "pr_automation",
+  "issue_tracking",
+  "actions_integration",
+  "code_review",
+  "branch_protection",
+  "audit_trail",
+  "webhooks"
+]
+
+[integrations.slack]
+enabled = true
+requires_auth = true
+webhook_url = "${SLACK_WEBHOOK_URL}"
+bot_token = "${SLACK_BOT_TOKEN}"
+channels = {
+  notifications = "#toolbox-notifications",
+  alerts = "#toolbox-alerts",
+  deployments = "#toolbox-deployments",
+  monitoring = "#toolbox-monitoring"
+}
+
+[integrations.aws]
+enabled = true
+region = "${AWS_REGION:-us-east-1}"
+services = ["s3", "cloudfront", "rds", "lambda", "ecs"]
+credentials = "iam_role"
+
+# =============================================================================
+# MCP SERVERS CONFIGURATION
+# =============================================================================
+
+[mcp.servers]
+auto_start = true
+restart_on_failure = true
+health_check_interval = 60
+
+[mcp.servers.filesystem]
+enabled = true
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem"]
+allowed_dirs = ["./src", "./tests", "./docs"]
+
+[mcp.servers.postgres]
+enabled = true
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-postgres"]
+database_url = "${DATABASE_URL}"
+
+[mcp.servers.github]
+enabled = true
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
+token = "${GITHUB_TOKEN}"
+
+[mcp.servers.stytch]
+enabled = true
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-stytch"]
+
+# =============================================================================
+# DEPLOYMENT & CI/CD
+# =============================================================================
+
+[deployment]
+strategy = "blue_green"
+environments = ["development", "staging", "production"]
+auto_deploy = false
+rollback_enabled = true
+
+[deployment.production]
+url = "https://toolbox.production.com"
+cdn = "cloudfront"
+ssl = true
+monitoring = true
+alerts = true
+
+[ci_cd]
+provider = "github_actions"
+parallel_jobs = true
+cache_dependencies = true
+artifact_storage = "s3"
+
+[ci_cd.stages]
+build = ["compile", "bundle", "optimize"]
+test = ["unit", "integration", "e2e", "security"]
+deploy = ["validate", "migrate", "release", "verify"]
+
+# =============================================================================
+# MONITORING & PERFORMANCE
+# =============================================================================
+
+[monitoring]
+enabled = true
+provider = "datadog"
+apm = true
+rum = true
+logs = true
+custom_metrics = true
+
+[monitoring.alerts]
+cpu_threshold = 80
+memory_threshold = 85
+error_rate_threshold = 1
+response_time_threshold = 2000
+
+[performance]
+caching = true
+cdn = true
+compression = true
+lazy_loading = true
+code_splitting = true
+optimization_level = "production"
+
+# =============================================================================
+# SECURITY
+# =============================================================================
+
+[security]
+enforce_https = true
+csp_enabled = true
+cors_enabled = true
+rate_limiting = true
+ddos_protection = true
+
+[security.scanning]
+enabled = true
+on_commit = true
+on_pr = true
+block_on_high = true
+tools = ["snyk", "semgrep", "gitleaks", "trivy"]
+
+[security.compliance]
+standards = ["SOC2", "GDPR", "CCPA", "HIPAA"]
+audit_logging = true
+data_encryption = true
+pii_detection = true
+
+# =============================================================================
+# DEVELOPMENT WORKFLOW
+# =============================================================================
+
+[workflow]
+branching_model = "git-flow"
+pr_required = true
+code_owners = true
+protected_branches = ["main", "production"]
+
+[workflow.code_review]
+required_approvals = 2
+dismiss_stale_reviews = true
+require_up_to_date = true
+codeowners_approval = true
+
+[workflow.testing]
+coverage_threshold = 90
+fail_on_decrease = true
+parallel_execution = true
+flaky_test_retry = 3
+
+# =============================================================================
+# CUSTOM COMMANDS
+# =============================================================================
+
+[commands]
+dev = "npm run dev"
+build = "npm run build"
+test = "npm run test"
+deploy = "npm run deploy"
+init = "bash scripts/init-project.sh"
+backup = "bash scripts/backup.sh"
+restore = "bash scripts/restore.sh"
+
+# =============================================================================
+# END OF TOOLBOX-PRODUCTION-FINAL CONFIGURATION
+# =============================================================================

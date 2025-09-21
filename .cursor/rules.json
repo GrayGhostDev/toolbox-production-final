@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "aiRules": {
+    "general": {
+      "alwaysExplainChanges": true,
+      "preferFunctionalProgramming": false,
+      "useTypeScriptStrictMode": true,
+      "enforceErrorHandling": true,
+      "preferAsyncAwait": true,
+      "avoidMagicNumbers": true,
+      "useDescriptiveVariableNames": true,
+      "maxFunctionLength": 50,
+      "maxFileLength": 500,
+      "preferComposition": true
+    },
+
+    "codeGeneration": {
+      "includeJSDoc": true,
+      "includeTypeAnnotations": true,
+      "includeErrorHandling": true,
+      "includeTests": true,
+      "testFramework": "jest",
+      "preferModularCode": true,
+      "followExistingPatterns": true,
+      "respectProjectStructure": true,
+      "useExistingUtilities": true,
+      "avoidDuplication": true
+    },
+
+    "security": {
+      "neverHardcodeSecrets": true,
+      "useEnvironmentVariables": true,
+      "validateInputs": true,
+      "sanitizeOutputs": true,
+      "useSecureDefaults": true,
+      "implementRateLimiting": true,
+      "enforceAuthentication": true,
+      "enforceAuthorization": true,
+      "logSecurityEvents": true,
+      "encryptSensitiveData": true
+    },
+
+    "performance": {
+      "optimizeForSpeed": true,
+      "minimizeMemoryUsage": true,
+      "useCaching": true,
+      "lazyLoadWhenPossible": true,
+      "avoidSynchronousOperations": true,
+      "optimizeLoops": true,
+      "useEfficientDataStructures": true,
+      "minimizeDatabaseQueries": true,
+      "implementPagination": true,
+      "useConnectionPooling": true
+    },
+
+    "testing": {
+      "writeUnitTests": true,
+      "writeIntegrationTests": true,
+      "writeE2ETests": false,
+      "minimumCoverage": 80,
+      "testEdgeCases": true,
+      "testErrorConditions": true,
+      "mockExternalDependencies": true,
+      "useTestDoubles": true,
+      "followAAA": true,
+      "descriptiveTestNames": true
+    },
+
+    "documentation": {
+      "documentPublicAPIs": true,
+      "includeExamples": true,
+      "documentComplexLogic": true,
+      "updateReadme": true,
+      "maintainChangelog": true,
+      "documentEnvironmentVariables": true,
+      "documentDependencies": true,
+      "includeArchitecturalDecisions": true,
+      "documentSecurityConsiderations": true,
+      "documentPerformanceConsiderations": true
+    },
+
+    "refactoring": {
+      "preserveFunctionality": true,
+      "improveReadability": true,
+      "reduceComplexity": true,
+      "eliminateDuplication": true,
+      "improveTestability": true,
+      "followSOLID": true,
+      "useDependencyInjection": true,
+      "extractReusableComponents": true,
+      "simplifyConditionals": true,
+      "optimizeImports": true
+    },
+
+    "debugging": {
+      "addDebugLogging": true,
+      "includeStackTraces": true,
+      "useDescriptiveErrorMessages": true,
+      "implementErrorRecovery": true,
+      "addBreakpoints": false,
+      "validateAssumptions": true,
+      "checkBoundaryConditions": true,
+      "logImportantStateChanges": true,
+      "implementHealthChecks": true,
+      "addMetrics": true
+    },
+
+    "codeReview": {
+      "checkForSecurityIssues": true,
+      "verifyTestCoverage": true,
+      "ensureDocumentation": true,
+      "validatePerformance": true,
+      "checkAccessibility": true,
+      "verifyErrorHandling": true,
+      "checkForMemoryLeaks": true,
+      "validateAPIContracts": true,
+      "ensureBackwardCompatibility": true,
+      "checkLicenseCompliance": true
+    },
+
+    "authentication": {
+      "useStytch": true,
+      "requireMFAForSensitiveOps": true,
+      "implementSessionManagement": true,
+      "useSecureTokenStorage": true,
+      "implementTokenRotation": true,
+      "enforcePasswordPolicies": false,
+      "usePasswordless": true,
+      "implementRBAC": true,
+      "auditAuthEvents": true,
+      "implementAccountLocking": true
+    }
+  },
+
+  "projectRules": {
+    "namingConventions": {
+      "files": "kebab-case",
+      "components": "PascalCase",
+      "functions": "camelCase",
+      "constants": "UPPER_SNAKE_CASE",
+      "interfaces": "IPascalCase",
+      "types": "TPascalCase",
+      "enums": "PascalCase",
+      "databases": "snake_case"
+    },
+
+    "folderStructure": {
+      "src": ["components", "pages", "utils", "hooks", "services", "types", "constants"],
+      "tests": ["unit", "integration", "e2e"],
+      "docs": ["api", "guides", "architecture"],
+      "scripts": ["build", "deploy", "migrate"]
+    },
+
+    "gitConventions": {
+      "commitFormat": "conventional",
+      "branchNaming": {
+        "feature": "feature/",
+        "bugfix": "bugfix/",
+        "hotfix": "hotfix/",
+        "release": "release/"
+      },
+      "requireIssueNumber": true,
+      "signCommits": true,
+      "squashMerge": true
+    },
+
+    "dependencies": {
+      "checkForUpdates": true,
+      "auditVulnerabilities": true,
+      "preferExactVersions": false,
+      "groupUpdates": true,
+      "autoUpdate": false
+    },
+
+    "quality": {
+      "maxCyclomaticComplexity": 10,
+      "maxCognitiveComplexity": 15,
+      "maxNestingDepth": 3,
+      "maxParameterCount": 4,
+      "maxLineLength": 100,
+      "enforceImmutability": false,
+      "preferPureFunction": true
+    }
+  },
+
+  "workflowRules": {
+    "pr": {
+      "requireApprovals": 1,
+      "requireTests": true,
+      "requireDocumentation": true,
+      "autoAssignReviewers": true,
+      "blockOnFailedChecks": true,
+      "deleteAfterMerge": true
+    },
+
+    "deployment": {
+      "requireManualApproval": true,
+      "runSmokeTests": true,
+      "enableRollback": true,
+      "useBlueGreen": false,
+      "useCanary": false,
+      "notifyOnSuccess": true,
+      "notifyOnFailure": true
+    },
+
+    "monitoring": {
+      "trackErrors": true,
+      "trackPerformance": true,
+      "trackUsage": true,
+      "alertOnThreshold": true,
+      "generateReports": true
+    }
+  },
+
+  "aiPersonality": {
+    "tone": "professional",
+    "verbosity": "concise",
+    "explanationLevel": "intermediate",
+    "preferredLanguage": "en",
+    "useEmoji": false,
+    "useHumor": false,
+    "beOpinionated": true,
+    "suggestBestPractices": true,
+    "provideAlternatives": true,
+    "explainTradeoffs": true
+  },
+
+  "integrationRules": {
+    "stytch": {
+      "enforceAuthentication": true,
+      "requireMFA": false,
+      "sessionDuration": 28800,
+      "usePasswordless": true
+    },
+    "github": {
+      "enforceSSO": true,
+      "requireSignedCommits": true,
+      "protectMainBranch": true
+    },
+    "slack": {
+      "notifyOnBuild": true,
+      "notifyOnDeploy": true,
+      "notifyOnError": true
+    },
+    "postgres": {
+      "usePreparedStatements": true,
+      "enableQueryLogging": true,
+      "enforceSSL": true
+    }
+  }
+}

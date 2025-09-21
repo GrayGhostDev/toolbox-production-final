@@ -1,0 +1,82 @@
+{
+  "name": "toolbox-production-final",
+  "version": "1.0.0",
+  "description": "Production-ready enterprise toolbox application with comprehensive automation features",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:e2e": "playwright test",
+    "db:migrate": "node scripts/migrate.js",
+    "db:seed": "node scripts/seed.js",
+    "mcp:verify": "bash .cursor/scripts/verify-mcp-servers.sh",
+    "backup": "bash .cursor/scripts/backup-restore.sh backup",
+    "init": "bash .cursor/scripts/init-toolbox-database.sh"
+  },
+  "keywords": [
+    "toolbox",
+    "enterprise",
+    "automation",
+    "stytch",
+    "mcp",
+    "cursor-ide"
+  ],
+  "author": "Gray Ghost Data",
+  "license": "Proprietary",
+  "dependencies": {
+    "@stytch/nextjs": "^17.0.0",
+    "@stytch/vanilla-js": "^4.8.0",
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "pg": "^8.11.3",
+    "axios": "^1.6.5",
+    "@slack/web-api": "^6.11.2",
+    "@octokit/rest": "^20.0.2",
+    "zod": "^3.22.4",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/pg": "^8.10.9",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.1.0",
+    "prettier": "^3.2.4",
+    "jest": "^29.7.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.2.0",
+    "@playwright/test": "^1.41.0",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "optionalDependencies": {
+    "@modelcontextprotocol/server-filesystem": "^0.1.0",
+    "@modelcontextprotocol/server-postgres": "^0.1.0",
+    "@modelcontextprotocol/server-github": "^0.1.0",
+    "@modelcontextprotocol/server-memory": "^0.1.0",
+    "@modelcontextprotocol/server-sequential-thinking": "^0.1.0",
+    "@modelcontextprotocol/server-slack": "^0.1.0",
+    "@modelcontextprotocol/server-stytch": "^0.1.0",
+    "@modelcontextprotocol/server-docker": "^0.1.0",
+    "@modelcontextprotocol/server-kubernetes": "^0.1.0",
+    "@modelcontextprotocol/server-puppeteer": "^0.1.0"
+  }
+}
